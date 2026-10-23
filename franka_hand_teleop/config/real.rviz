@@ -1,0 +1,48 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Fixed Frame: fr3_link0
+    Background Color: 28; 32; 40
+    Frame Rate: 30
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 0.1
+      Plane Cell Count: 20
+    - Class: rviz_default_plugins/RobotModel
+      Name: Real FR3
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /hand_teleop_real/robot_description
+        Durability Policy: Transient Local
+      Visual Enabled: true
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Workspace and target
+      Enabled: true
+      Topic:
+        Value: /hand_teleop_real/markers
+        Durability Policy: Transient Local
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 2.5
+      Pitch: 0.45
+      Yaw: 0.7
+      Focal Point:
+        X: 0.2
+        Y: 0
+        Z: 0.5
+Window Geometry:
+  Width: 1100
+  Height: 800

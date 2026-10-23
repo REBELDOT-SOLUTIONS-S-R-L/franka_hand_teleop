@@ -1,0 +1,10 @@
+<library path="franka_hand_controllers">
+  <class name="franka_hand_controllers/RobotClockTrajectoryController"
+         type="franka_hand_controllers::RobotClockTrajectoryController"
+         base_class_type="controller_interface::ControllerInterface">
+    <description>Position-only FR3 trajectory controller timed by fr3/robot_time.</description>
+  </class>
+  <class name="franka_hand_controllers/GuardedRollingController" type="franka_hand_controllers::GuardedRollingController" base_class_type="controller_interface::ControllerInterface">
+    <description>Robot-clock, session-fenced rolling quintics with finite checked tails.</description>
+  </class>
+</library>

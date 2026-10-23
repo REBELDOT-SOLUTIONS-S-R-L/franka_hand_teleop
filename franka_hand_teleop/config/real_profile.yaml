@@ -1,0 +1,53 @@
+# Installation checks reported completed and approved by the user and Safety
+# Operator on 2026-10-20. These records do not configure Watchman or provide
+# any safety-rated function; physical app motion has not been tested by the agent.
+schema_version: 1
+commissioning:
+  # Validated Work/FCI safety configuration, including independent stopping and
+  # any required enabling/protective devices. X4 is not mandated by the app.
+  robot_safety_verified: true
+  workspace_verified: true
+  tool_and_load_verified: true
+# Closing intent starts hold -> confirmed Grasp -> 5 cm upward lift -> carry.
+# Opening fully releases the 1 cm grasp-height floor. No automatic homing.
+enable_gripper: true
+# Lowest documented continuous force for the original Franka Hand (30–70 N).
+grasp_force_N: 30.0
+# Both closing Grasp and bounded opening Move speeds.
+gripper_speed_m_s: 0.040
+motion:
+  # 50 mm inward from every face of the user-measured tool box.
+  workspace_min: [0.45, -0.30, 0.05]
+  workspace_max: [0.65, 0.30, 0.25]
+  arm_workspace_min: [-0.45, -0.55, -0.05]
+  arm_workspace_max: [0.85, 0.55, 1.10]
+  workspace_margin: 0.02
+  # Following gain and speed doubled; acceleration/jerk ceilings retained.
+  # FR3 Cartesian acceleration maximum is 9 m/s²; keep the 8.1 m/s² reserve.
+  # The camera-to-workspace scale and all geometric boundaries stay fixed.
+  tracking_gain: 27.0
+  max_speed: 1.44
+  max_acceleration: 8.10
+  # Per-joint ceilings; whole-arm Cartesian bounds can constrain motion sooner.
+  joint_speed: 1.5
+  joint_acceleration: 4.5
+  joint_jerk: 91.125
+  # 25 degrees; conservative whole-arm travel bound normally limits first.
+  max_joint_step: 0.4363323129985824
+  # Reach-weighted whole-arm travel bound; actual TCP displacement is smaller.
+  max_tool_step: 0.100
+  arm_capture_distance: 0.03
+  table_size: 2.0
+  table_thickness: 0.05
+
+  # Maximum finite stopping tail; the stream protocol supports up to 1.5 s.
+  max_curve_duration_s: 1.5
+# Timing is also configured here. Values are loaded once per session.
+bridge:
+  update_period_s: 0.06666666666666667
+  proposal_horizon_s: 0.20
+  handoff_lead_s: 0.15
+  min_publish_lead_s: 0.10
+  planning_budget_s: 0.02
+  # Must exceed handoff_lead_s by at least one 20 ms state-report interval.
+  min_curve_duration_s: 0.20

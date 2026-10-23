@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="fr3">
+  <!-- This file has no real-hardware branch, network address, or Franka driver. -->
+  <xacro:include filename="$(find franka_description)/robots/fr3/fr3.urdf.xacro"/>
+  <xacro:include filename="$(find franka_hardware)/ros2_control/franka_ros2_control_macros.xacro"/>
+  <xacro:property name="initial" value="${xacro.load_yaml('$(find franka_hand_teleop)/config/initial_positions.yaml')}"/>
+  <ros2_control name="HandTeleopFakeSystem" type="system">
+    <hardware><plugin>mock_components/GenericSystem</plugin></hardware>
+    <xacro:configure_arm_joint joint_name="fr3_joint1" initial_position="${initial['fr3_joint1']}" include_effort_command="false"/>
+    <xacro:configure_arm_joint joint_name="fr3_joint2" initial_position="${initial['fr3_joint2']}" include_effort_command="false"/>
+    <xacro:configure_arm_joint joint_name="fr3_joint3" initial_position="${initial['fr3_joint3']}" include_effort_command="false"/>
+    <xacro:configure_arm_joint joint_name="fr3_joint4" initial_position="${initial['fr3_joint4']}" include_effort_command="false"/>
+    <xacro:configure_arm_joint joint_name="fr3_joint5" initial_position="${initial['fr3_joint5']}" include_effort_command="false"/>
+    <xacro:configure_arm_joint joint_name="fr3_joint6" initial_position="${initial['fr3_joint6']}" include_effort_command="false"/>
+    <xacro:configure_arm_joint joint_name="fr3_joint7" initial_position="${initial['fr3_joint7']}" include_effort_command="false"/>
+    <xacro:configure_finger_joint joint_name="fr3_finger_joint1" include_effort_command="false" position_only="true"/>
+    <joint name="fr3_finger_joint2">
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+</robot>

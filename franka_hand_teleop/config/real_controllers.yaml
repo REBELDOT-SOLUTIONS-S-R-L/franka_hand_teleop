@@ -1,0 +1,40 @@
+/**/controller_manager:
+  ros__parameters:
+    update_rate: 1000
+    thread_priority: 97
+    lock_memory: true
+    # FCI readOnce blocks on robot packets. Do not add a second periodic sleep
+    # or skip cycles to catch up with a separate controller-manager clock.
+    hardware_synchronization:
+      expect_blocking_read_write: true
+      minimum_cycle_time: 0.0001
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    franka_robot_state_broadcaster:
+      type: franka_robot_state_broadcaster/FrankaRobotStateBroadcaster
+      state_interfaces: [robot_state]
+    fr3_arm_controller:
+      type: franka_hand_controllers/GuardedRollingController
+/**/joint_state_broadcaster:
+  ros__parameters:
+    use_local_topics: true
+/**/fr3_arm_controller:
+  ros__parameters:
+    joints: [fr3_joint1, fr3_joint2, fr3_joint3, fr3_joint4, fr3_joint5, fr3_joint6, fr3_joint7]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    interpolate_from_desired_state: true
+    # The hardware seeds these from FCI q_d before controller activation.
+    set_last_command_interface_value_as_state_on_activation: true
+    cmd_timeout: 0.25
+    constraints:
+      goal_time: 0.15
+      stopped_velocity_tolerance: 0.01
+      decelerate_on_cancel: true
+      fr3_joint1: {trajectory: 0.03, goal: 0.005, max_deceleration_on_cancel: 0.3}
+      fr3_joint2: {trajectory: 0.03, goal: 0.005, max_deceleration_on_cancel: 0.3}
+      fr3_joint3: {trajectory: 0.03, goal: 0.005, max_deceleration_on_cancel: 0.3}
+      fr3_joint4: {trajectory: 0.03, goal: 0.005, max_deceleration_on_cancel: 0.3}
+      fr3_joint5: {trajectory: 0.03, goal: 0.005, max_deceleration_on_cancel: 0.3}
+      fr3_joint6: {trajectory: 0.03, goal: 0.005, max_deceleration_on_cancel: 0.3}
+      fr3_joint7: {trajectory: 0.03, goal: 0.005, max_deceleration_on_cancel: 0.3}

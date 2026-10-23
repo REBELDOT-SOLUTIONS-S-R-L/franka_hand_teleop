@@ -1,0 +1,16 @@
+# Python and local tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+# Generated ROS workspace outputs and recordings
+/build/
+/install/
+/log/
+/logs/
+*.db3
+*.mcap
+# Local environment
+.env

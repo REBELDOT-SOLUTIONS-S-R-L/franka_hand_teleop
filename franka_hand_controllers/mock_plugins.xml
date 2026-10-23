@@ -1,0 +1,7 @@
+<library path="franka_hand_controllers">
+  <class name="franka_hand_controllers/ClockedMockSystem"
+         type="franka_hand_controllers::ClockedMockSystem"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>OFFLINE ONLY: GenericSystem with a synthetic 1 kHz robot clock. No network or robot driver.</description>
+  </class>
+</library>
